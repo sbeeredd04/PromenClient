@@ -8,7 +8,6 @@ interface SidebarProps {
 
 export default function Sidebar({ activeSectionId }: SidebarProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Update active index based on section ID
@@ -18,15 +17,6 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
       setActiveIndex(index);
     }
   }, [activeSectionId]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navItems = [
     { id: 'home', name: 'Home', icon: <Home className="sidebar-icon" /> },
@@ -39,9 +29,13 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
 
   // Function to scroll to a section when clicking on sidebar item
   const scrollToSection = (id: string) => {
+    const container = document.querySelector('.scroll-smooth');
     const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (element && container) {
+      container.scrollTo({
+        top: element.offsetTop,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -53,7 +47,7 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
 
   return (
     <motion.div 
-      className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50"
+      className="h-full flex flex-col items-center justify-center z-30 px-3"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
@@ -61,7 +55,7 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div 
-        className="glass-sidebar rounded-full flex flex-col items-center py-5 px-2 space-y-6 backdrop-blur-2xl"
+        className="glass-sidebar rounded-full flex flex-col items-center py-6 px-2 space-y-8 backdrop-blur-2xl"
         animate={{ 
           width: isHovered ? '60px' : '50px',
           boxShadow: isHovered ? '0 0 15px rgba(255, 255, 255, 0.2)' : '0 0 10px rgba(0, 0, 0, 0.3)'
@@ -92,14 +86,23 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
               />
             )}
             
-            {/* Icon */}
-            {item.icon}
+            {/* Icon with glow effect when active */}
+            <motion.div
+              animate={{ 
+                filter: activeSectionId === item.id 
+                  ? "drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))" 
+                  : "drop-shadow(0 0 0px rgba(255, 255, 255, 0))"
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              {item.icon}
+            </motion.div>
             
             {/* Tooltip on hover */}
             <AnimatePresence>
               {isHovered && (
                 <motion.div
-                  className="absolute left-14 bg-black/80 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap"
+                  className="absolute left-14 bg-black/80 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap z-50"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -10 }}

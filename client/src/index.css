@@ -54,9 +54,12 @@
   body {
     @apply antialiased bg-background text-foreground;
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-    background-color: #050510;
-    background: linear-gradient(to bottom, #09061A, #0A0A18);
+    overflow: hidden;
+    height: 100vh;
+    background-color: #121212;
+    background-image: url('https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=2574&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
     background-attachment: fixed;
   }
 
@@ -66,16 +69,26 @@
 
   /* Glass UI Components */
   .glass {
-    background: rgba(30, 30, 30, 0.55);
+    background: rgba(40, 40, 45, 0.4);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+  }
+
+  /* Vision Pro style container */
+  .vision-container {
+    background: rgba(30, 30, 35, 0.4);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 24px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .glass-sidebar {
-    background: rgba(30, 30, 30, 0.65);
+    background: rgba(40, 40, 50, 0.5);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
