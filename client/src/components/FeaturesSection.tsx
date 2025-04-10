@@ -80,7 +80,7 @@ export default function FeaturesSection() {
             <div className="order-1 lg:order-2 floating">
               <Card className="glass gradient-border rounded-xl overflow-hidden max-w-md mx-auto">
                 <img 
-                  src="https://images.unsplash.com/photo-1693126450082-36f67f9d4439?q=80&w=1970&auto=format&fit=crop" 
+                  src="" 
                   alt="Enhance Prompt Feature" 
                   className="w-full h-auto" 
                 />

@@ -39,7 +39,7 @@ export default function WhySection() {
     {
       icon: <Lightbulb className="h-6 w-6 text-white" />,
       title: "AI-Powered Enhancement",
-      description: "Intelligent suggestions that improve clarity, context, and effectiveness of your prompts."
+      description: "Turn basic prompts into detailed requests. Our intelligent suggestions improve clarity, context, and effectiveness, transforming vague requests like 'Summarize this' into specific instructions for better AI output."
     },
     {
       icon: <Keyboard className="h-6 w-6 text-white" />,
@@ -52,9 +52,9 @@ export default function WhySection() {
     <section 
       id="why" 
       ref={sectionRef}
-      className="min-h-screen flex items-center px-6 py-20"
+      className="min-h-screen flex items-center py-20"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="w-full">
         <motion.div 
           className="glass p-10 md:p-16"
           initial={{ opacity: 0, y: 30 }}
@@ -90,20 +90,19 @@ export default function WhySection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              In the near future, the primary bridge connecting humans with AI tools will be through prompts. 
-              Promen positions itself at the forefront of this transformation by providing a powerful interface 
-              for crafting and refining prompts.
+              In the near future, prompts are the primary bridge to AI tools. The quality of your prompt directly dictates the quality of the AI's output. A basic prompt might yield a vague response, while a well-crafted one unlocks detailed, relevant results. 
+              Promen is designed to elevate your prompts, providing a powerful interface for crafting and refining your interaction with AI.
             </motion.p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <FeatureCard
+              <FeatureCard 
                 key={index}
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
-                delay={0.3 + (index * 0.1)}
+                delay={0.3 + index * 0.1}
               />
             ))}
           </div>

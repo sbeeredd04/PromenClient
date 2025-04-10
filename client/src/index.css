@@ -53,7 +53,7 @@
 
   body {
     @apply antialiased bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     overflow-x: hidden;
     background-color: #050510;
     background: linear-gradient(to bottom, #09061A, #0A0A18);
@@ -61,7 +61,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   /* Glass UI Components */

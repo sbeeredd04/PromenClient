@@ -16,9 +16,9 @@ export default function BetaSection() {
     <section 
       id="beta" 
       ref={sectionRef}
-      className="min-h-screen flex items-center px-6 py-20"
+      className="min-h-screen flex items-center py-20"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="w-full">
         <motion.div 
           className="glass p-10 md:p-16"
           initial={{ opacity: 0, y: 30 }}
@@ -99,30 +99,29 @@ export default function BetaSection() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-blue-500/30 rounded-xl blur-xl"></div>
                 <div className="glass rounded-xl p-6 relative">
-                  <img 
-                    src="https://images.unsplash.com/photo-1550063873-ab792950096b?q=80&w=1770&auto=format&fit=crop" 
-                    alt="Beta Program" 
-                    className="w-full h-auto rounded-lg mb-6"
-                  />
-                  
-                  <h3 className="text-xl font-semibold mb-2">What Beta Testers Say</h3>
-                  
-                  <div className="glass p-4 rounded-lg mb-4">
-                    <p className="text-white/80 italic">"The prompt enhancement feature saved me so much time when working with AI tools. It's like having an AI expert by my side at all times."</p>
-                    <div className="flex items-center mt-3">
-                      <div className="h-8 w-8 rounded-full bg-purple-500/30 mr-2"></div>
-                      <span className="text-sm text-white/60">Alex K., Product Designer</span>
+                  <div className="flex items-center mb-4">
+                    <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center mr-3">
+                      <div className="h-6 w-6 bg-white/90 rounded-sm flex items-center justify-center text-purple-700 font-bold text-xs">
+                        P
+                      </div>
                     </div>
+                    <h3 className="text-lg font-semibold">Promen AI Assistant</h3>
                   </div>
                   
-                  <p className="text-white/70 text-sm">
-                    Beta access is limited to ensure we can provide personal support 
-                    to every tester. Apply now to secure your spot.
-                  </p>
+                  <div className="space-y-4">
+                    <div className="glass p-3 rounded-lg text-white/80 text-sm">
+                      <p>Original prompt: <span className="text-white">Write about climate change</span></p>
+                    </div>
+                    
+                    <div className="glass p-3 rounded-lg border border-purple-500/30 text-white/80 text-sm">
+                      <p>Enhanced prompt:</p>
+                      <p className="text-white">Write a comprehensive 500-word analysis of climate change, discussing its causes, current impacts, and potential solutions. Include scientific data and address both environmental and economic perspectives.</p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>

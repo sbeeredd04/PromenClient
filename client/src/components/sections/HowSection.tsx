@@ -52,9 +52,9 @@ export default function HowSection() {
     <section 
       id="how" 
       ref={sectionRef}
-      className="min-h-screen flex items-center px-6 py-20"
+      className="min-h-screen flex items-center py-20"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="w-full">
         <motion.div 
           className="glass p-10 md:p-16"
           initial={{ opacity: 0, y: 30 }}
@@ -102,36 +102,36 @@ export default function HowSection() {
                 number={step.number}
                 title={step.title}
                 description={step.description}
-                delay={0.3 + (index * 0.1)}
+                delay={0.3 + index * 0.1}
               />
             ))}
           </div>
           
-          <motion.div
-            className="relative mt-12 glass p-6 rounded-xl overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <div className="aspect-w-16 aspect-h-9 relative">
-              <img 
-                src="https://images.unsplash.com/photo-1661956602868-6ae368943878?q=80&w=1470&auto=format&fit=crop" 
-                alt="Promen Demo" 
-                className="w-full h-auto rounded-lg object-cover opacity-80" 
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-16 w-16 rounded-full bg-purple-500/80 flex items-center justify-center cursor-pointer hover:bg-purple-500 transition-colors">
-                  <Play className="h-8 w-8 text-white ml-1" />
+          <div className="flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="glass p-6 rounded-xl max-w-2xl"
+            >
+              <div className="flex items-center mb-4">
+                <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center mr-3">
+                  <Play className="h-5 w-5 text-white" />
+                </div>
+                <h3 className="text-lg font-semibold">Watch Demo</h3>
+              </div>
+              
+              <div className="aspect-video bg-black/30 rounded-lg flex items-center justify-center">
+                <div className="text-center">
+                  <p className="text-white/70 mb-2">Video demo coming soon</p>
+                  <div className="inline-flex items-center rounded-full px-3 py-1 text-sm bg-purple-500/20 text-white/80">
+                    <span>Stay tuned</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <h3 className="text-xl font-semibold mt-4">See Promen in Action</h3>
-            <p className="text-white/70">
-              Watch our demo to see how Promen can transform your interaction with AI tools, making your 
-              prompts more effective and your workflow more efficient.
-            </p>
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

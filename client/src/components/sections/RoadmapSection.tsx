@@ -85,9 +85,9 @@ export default function RoadmapSection() {
     <section 
       id="roadmap" 
       ref={sectionRef}
-      className="min-h-screen flex items-center px-6 py-20"
+      className="min-h-screen flex items-center py-20"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="w-full">
         <motion.div 
           className="glass p-10 md:p-16"
           initial={{ opacity: 0, y: 30 }}
@@ -103,7 +103,7 @@ export default function RoadmapSection() {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center rounded-full px-3 py-1 text-sm bg-purple-500/20 text-white/80 mb-4"
             >
-              <span>Looking Forward</span>
+              <span>Future Plans</span>
             </motion.div>
             
             <motion.h2 
@@ -113,7 +113,7 @@ export default function RoadmapSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Development <span className="gradient-text">Roadmap</span>
+              Our <span className="gradient-text">Roadmap</span>
             </motion.h2>
             
             <motion.p 
@@ -123,12 +123,12 @@ export default function RoadmapSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Our vision for Promen extends far beyond today. Here's our plan for making Promen
-              the ultimate AI prompt assistant.
+              We have an exciting roadmap ahead, with plans to expand Promen's capabilities 
+              and make it available across more platforms.
             </motion.p>
           </div>
           
-          <div className="space-y-24 relative py-8">
+          <div className="space-y-12">
             {timelineItems.map((item, index) => (
               <TimelineItem
                 key={index}

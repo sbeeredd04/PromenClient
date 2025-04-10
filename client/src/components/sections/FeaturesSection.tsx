@@ -92,41 +92,41 @@ export default function FeaturesSection() {
   const features = [
     {
       title: "Enhance Prompt",
-      description: "Takes your current prompt and expands upon it, adding detail, context, and specificity to make it more effective for AI models.",
+      description: "Transforms basic prompts into detailed instructions. For example, turning 'Summarize this article' into a specific request for key findings, policy implications, and solutions within a word limit.",
       keyboardShortcut: "Ctrl+Shift+L / Cmd+Shift+L",
       bulletPoints: [
-        "Adds crucial context that AI models need",
-        "Expands brief ideas into detailed instructions",
-        "Improves output quality with better input"
+        "Adds crucial context and structure for clarity",
+        "Guides AI to provide specific, relevant information",
+        "Significantly improves the quality and focus of AI output"
       ],
-      image: "https://images.unsplash.com/photo-1693126450082-36f67f9d4439?q=80&w=1970&auto=format&fit=crop",
-      icon: <Sparkles className="h-4 w-4 text-purple-400" />
+      image: "/src/assets/enhance.png",
+      icon: <Sparkles className="h-4 w-4" />
     },
     {
       title: "Rephrase Prompt",
-      description: "Rewrites your prompt to be clearer, more concise, and precise, improving its overall quality and effectiveness.",
-      keyboardShortcut: "Ctrl+Shift+K / Cmd+Shift+K",
+      description: "Optimizes your prompt phrasing for better clarity and conciseness while preserving your original goal, ensuring the AI understands your exact intent.",
+      keyboardShortcut: "Ctrl+Shift+R / Cmd+Shift+R",
       bulletPoints: [
-        "Eliminates ambiguity and wordiness",
-        "Structures prompts for better comprehension",
-        "Maintains your intent while improving clarity"
+        "Refines wording for maximum impact",
+        "Reduces ambiguity and potential misinterpretations",
+        "Generates alternative phrasings to spark creativity"
       ],
-      image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=1974&auto=format&fit=crop",
+      image: "/src/assets/rephrase.png",
       reverse: true,
-      icon: <Wand2 className="h-4 w-4 text-purple-400" />
+      icon: <Wand2 className="h-4 w-4" />
     },
     {
-      title: "Agent Mode",
-      description: "Interact with an AI agent directly within text fields. Give it instructions or ask questions, and the agent will generate responses or modify text in place.",
-      keyboardShortcut: "Ctrl+Shift+U / Cmd+Shift+U",
+      title: "AI Assistant",
+      description: "An intelligent assistant that helps you craft the perfect prompt through conversation and suggestions.",
+      keyboardShortcut: "Ctrl+Shift+A / Cmd+Shift+A",
       bulletPoints: [
-        "Works as your personal writing assistant",
-        "Handles complex text transformations",
-        "Adapts to your specific needs and context"
+        "Interactive conversation to refine your ideas",
+        "Contextual suggestions based on your input",
+        "Learning from your preferences over time"
       ],
-      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop",
+      image: "/src/assets/agent.png",
       comingSoon: true,
-      icon: <Bot className="h-4 w-4 text-purple-400" />
+      icon: <Bot className="h-4 w-4" />
     }
   ];
 
@@ -134,9 +134,9 @@ export default function FeaturesSection() {
     <section 
       id="features" 
       ref={sectionRef}
-      className="min-h-screen flex items-center px-6 py-20"
+      className="min-h-screen flex items-center py-20"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="w-full">
         <motion.div 
           className="glass p-10 md:p-16"
           initial={{ opacity: 0, y: 30 }}
@@ -144,7 +144,7 @@ export default function FeaturesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -152,7 +152,7 @@ export default function FeaturesSection() {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center rounded-full px-3 py-1 text-sm bg-purple-500/20 text-white/80 mb-4"
             >
-              <span>Powerful Capabilities</span>
+              <span>Powerful Features</span>
             </motion.div>
             
             <motion.h2 
@@ -162,7 +162,7 @@ export default function FeaturesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Powerful <span className="gradient-text">Features</span>
+              Everything You <span className="gradient-text">Need</span>
             </motion.h2>
             
             <motion.p 
@@ -172,8 +172,8 @@ export default function FeaturesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Promen offers a suite of powerful tools to enhance your interactions with AI models, 
-              making your prompts more effective and your workflow more efficient.
+              Promen comes packed with powerful features to enhance your AI interactions, 
+              all accessible through simple keyboard shortcuts.
             </motion.p>
           </div>
           

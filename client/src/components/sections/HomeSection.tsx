@@ -16,8 +16,8 @@ export default function HomeSection() {
   }, []);
 
   return (
-    <section id="home" className="min-h-screen flex items-center px-6 py-20">
-      <div className="container mx-auto max-w-6xl">
+    <section id="home" className="min-h-screen flex items-center py-20">
+      <div className="w-full">
         <motion.div 
           className="glass p-10 md:p-16"
           initial={{ opacity: 0, y: 30 }}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Home, Search, Image, Shield, Layers, Play, Archive } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import NewIcon from '../assets/icon16.png'; // Import the new icon
 
 interface SidebarProps {
   activeSectionId: string;
@@ -53,7 +54,7 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
 
   return (
     <motion.div 
-      className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50"
+      className="fixed top-1/3 transform -translate-y-1/2 z-50"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
@@ -63,7 +64,7 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
       <motion.div 
         className="glass-sidebar rounded-full flex flex-col items-center py-5 px-2 space-y-6 backdrop-blur-2xl"
         animate={{ 
-          width: isHovered ? '60px' : '50px',
+          width: isHovered ? '70px' : '60px',
           boxShadow: isHovered ? '0 0 15px rgba(255, 255, 255, 0.2)' : '0 0 10px rgba(0, 0, 0, 0.3)'
         }}
         transition={{ duration: 0.3 }}
@@ -71,7 +72,7 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
         {navItems.map((item, index) => (
           <motion.div
             key={item.id}
-            className={`relative w-10 h-10 flex items-center justify-center rounded-full cursor-pointer ${
+            className={`relative w-12 h-12 flex items-center justify-center rounded-full cursor-pointer ${
               activeSectionId === item.id ? 'text-white' : 'text-white/50'
             }`}
             onClick={() => scrollToSection(item.id)}
@@ -111,6 +112,23 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
             </AnimatePresence>
           </motion.div>
         ))}
+
+        {/* Divider (optional, for visual separation) */}
+        <div className="w-full px-2">
+          <div className="h-px bg-white/10"></div>
+        </div>
+
+        {/* New Icon */}
+        <motion.div
+          className="relative w-12 h-12 flex items-center justify-center rounded-full"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 0.7, y: 0 }} // Slightly faded as it's not active
+          transition={{ duration: 0.3, delay: 0.5 }}
+          whileHover={{ scale: 1.1, opacity: 1 }} // Add hover effect
+        >
+          <img src={NewIcon} alt="Settings" className="w-6 h-6" /> {/* Adjust size as needed */}
+        </motion.div>
+
       </motion.div>
     </motion.div>
   );

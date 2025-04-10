@@ -64,6 +64,18 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
 
   return (
     <div className="relative min-h-screen">
+      {/* Background image */}
+      <div 
+        className="fixed inset-0 -z-20 overflow-hidden pointer-events-none"
+        style={{
+          backgroundImage: "url('/src/assets/home-interior-modern-dark-living-room-interior-black-empty-wall-mock-up-generative-ai-photo.jpeg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          filter: 'brightness(0.4)'
+        }}
+      />
+      
       {/* Background gradient orbs */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <motion.div 
@@ -89,12 +101,14 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
       </div>
       
       {/* Main content */}
-      <div className="relative min-h-screen flex">
-        {/* Sidebar */}
-        <Sidebar activeSectionId={activeSectionId} />
+      <div className="relative min-h-screen flex justify-center">
+        {/* Sidebar - positioned closer to content */}
+        <div className="w-[10%] flex justify-center">
+          <Sidebar activeSectionId={activeSectionId} />
+        </div>
         
-        {/* Main Content */}
-        <main className="flex-grow">
+        {/* Main Content - 80% width */}
+        <main className="flex-grow w-[80%] mx-auto">
           {children}
           
           {/* Scroll indicator (only shown on home section) */}
@@ -119,6 +133,9 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
             )}
           </AnimatePresence>
         </main>
+        
+        {/* Empty space for balance */}
+        <div className="w-[10%]"></div>
       </div>
       
       {/* Mouse follower cursor effect */}
