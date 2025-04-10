@@ -1,7 +1,30 @@
-import { ReactNode, useState, useEffect } from 'react';
+import React, { ReactNode, useState, useEffect, useRef } from 'react';
 import Sidebar from './Sidebar';
-import { ChevronDown, MousePointer } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+interface SectionProps {
+  id: string;
+  title: string;
+  content: ReactNode;
+  isActive: boolean;
+}
+
+const Section = ({ id, title, content, isActive }: SectionProps) => {
+  return (
+    <motion.div
+      className={`section-fade ${isActive ? 'active' : ''} h-full w-full absolute inset-0`}
+      initial={{ opacity: 0 }}
+      animate={{ 
+        opacity: isActive ? 1 : 0,
+        zIndex: isActive ? 10 : -1,
+      }}
+      transition={{ duration: 0.6 }}
+    >
+      {content}
+    </motion.div>
+  );
+};
 
 interface GlassLayoutProps {
   children: ReactNode;
@@ -9,134 +32,126 @@ interface GlassLayoutProps {
 
 export default function GlassLayout({ children }: GlassLayoutProps) {
   const [activeSectionId, setActiveSectionId] = useState('home');
-  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const contentRef = useRef<HTMLDivElement>(null);
+  
+  // Extract individual section components from children
+  const sections = Array.isArray(children) 
+    ? children.filter(child => React.isValidElement(child) && child.props.id)
+    : React.Children.toArray(children).filter(child => React.isValidElement(child) && (child as React.ReactElement).props.id);
+  
+  // Handle section change from sidebar
+  const handleSectionChange = (sectionId: string) => {
+    setActiveSectionId(sectionId);
+    const index = (sections as React.ReactElement[]).findIndex(
+      section => section.props.id === sectionId
+    );
+    if (index !== -1) {
+      setCurrentIndex(index);
+    }
+  };
 
-  // Function to update mouse position for subtle parallax effects
+  // Navigate between sections
+  const goToNextSection = () => {
+    if (currentIndex < sections.length - 1) {
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
+      const nextSection = sections[nextIndex] as React.ReactElement;
+      setActiveSectionId(nextSection.props.id);
+    }
+  };
+
+  const goToPrevSection = () => {
+    if (currentIndex > 0) {
+      const prevIndex = currentIndex - 1;
+      setCurrentIndex(prevIndex);
+      const prevSection = sections[prevIndex] as React.ReactElement;
+      setActiveSectionId(prevSection.props.id);
+    }
+  };
+
+  // Handle keyboard navigation
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  // Function to update active section based on scroll position
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100; // Offset to trigger a bit earlier
-      
-      // Get all section elements
-      const sections = document.querySelectorAll('section[id]');
-      
-      // Hide scroll indicator after scrolling
-      if (window.scrollY > 150 && showScrollIndicator) {
-        setShowScrollIndicator(false);
-      } else if (window.scrollY <= 100 && !showScrollIndicator) {
-        setShowScrollIndicator(true);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        goToNextSection();
+      } else if (e.key === 'ArrowLeft') {
+        goToPrevSection();
       }
-      
-      // Find the section that is currently in view
-      sections.forEach((section) => {
-        const sectionTop = (section as HTMLElement).offsetTop;
-        const sectionHeight = section.clientHeight;
-        const sectionId = section.getAttribute('id') || '';
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          setActiveSectionId(sectionId);
-        }
-      });
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    
-    // Call once on mount to set initial active section
-    handleScroll();
-    
+
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [showScrollIndicator]);
+  }, [currentIndex]);
 
   return (
-    <div className="relative min-h-screen">
-      {/* Background gradient orbs */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <motion.div 
-          className="absolute w-96 h-96 rounded-full bg-purple-600/20 blur-3xl"
-          animate={{ 
-            x: mousePosition.x * 0.02, 
-            y: mousePosition.y * 0.02,
-            scale: [1, 1.05, 1],
-          }}
-          transition={{ duration: 3, repeat: Infinity, repeatType: "mirror" }}
-          style={{ top: '20%', left: '10%' }}
-        />
-        <motion.div 
-          className="absolute w-96 h-96 rounded-full bg-blue-600/10 blur-3xl"
-          animate={{ 
-            x: mousePosition.x * -0.02, 
-            y: mousePosition.y * -0.02,
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
-          style={{ bottom: '10%', right: '20%' }}
-        />
-      </div>
+    <div className="h-full flex items-center justify-center overflow-hidden">
+      {/* Sidebar Navigation */}
+      <Sidebar 
+        activeSectionId={activeSectionId} 
+        onSectionChange={handleSectionChange} 
+      />
       
-      {/* Main content */}
-      <div className="relative min-h-screen flex">
-        {/* Sidebar */}
-        <Sidebar activeSectionId={activeSectionId} />
-        
-        {/* Main Content */}
-        <main className="flex-grow">
-          {children}
+      {/* Main Glass Container */}
+      <div className="main-container">
+        <div className="glass-panel relative">
+          {/* Header */}
+          <div className="absolute top-4 left-8 z-20">
+            <ChevronLeft className="w-5 h-5 text-white/60" />
+          </div>
           
-          {/* Scroll indicator (only shown on home section) */}
-          <AnimatePresence>
-            {activeSectionId === 'home' && showScrollIndicator && (
+          {/* Content Area */}
+          <div 
+            ref={contentRef} 
+            className="relative h-full w-full overflow-hidden"
+          >
+            {React.Children.map(children, (child: React.ReactNode, index) => {
+              if (React.isValidElement(child)) {
+                return (
+                  <Section
+                    key={child.props.id}
+                    id={child.props.id}
+                    title={child.props.title || 'Section'}
+                    content={child}
+                    isActive={index === currentIndex}
+                  />
+                );
+              }
+              return null;
+            })}
+          </div>
+          
+          {/* Navigation Controls */}
+          <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-2 z-20">
+            {sections.map((section, index) => (
+              <div 
+                key={index}
+                className={`pagination-dot ${index === currentIndex ? 'active' : ''}`}
+                onClick={() => {
+                  setCurrentIndex(index);
+                  setActiveSectionId((section as React.ReactElement).props.id);
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Progress Bar */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-1/3 z-30">
+            <div className="progress-bar">
               <motion.div 
-                className="scroll-indicator"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.5 }}
-              >
-                <motion.div 
-                  className="flex flex-col items-center"
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <span className="text-sm text-white/60 mb-1">Scroll to explore</span>
-                  <ChevronDown className="w-5 h-5 text-white/60" />
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </main>
+                className="progress-bar-active"
+                initial={{ width: '0%' }}
+                animate={{ 
+                  width: `${(currentIndex / (sections.length - 1)) * 100}%` 
+                }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      
-      {/* Mouse follower cursor effect */}
-      <motion.div
-        className="fixed w-6 h-6 rounded-full border-2 border-white/30 pointer-events-none z-50 hidden md:flex items-center justify-center"
-        animate={{ 
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
-          scale: activeSectionId === 'home' ? 1.2 : 1
-        }}
-        transition={{ duration: 0.1, ease: "linear" }}
-      >
-        <motion.div 
-          className="w-1.5 h-1.5 bg-white/50 rounded-full"
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        />
-      </motion.div>
     </div>
   );
 }
