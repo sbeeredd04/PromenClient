@@ -36,14 +36,15 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   
   // Extract individual section components from children
-  const sections = Array.isArray(children) 
-    ? children.filter(child => React.isValidElement(child) && child.props.id)
-    : React.Children.toArray(children).filter(child => React.isValidElement(child) && (child as React.ReactElement).props.id);
+  const sections = React.Children.toArray(children)
+    .filter((child): child is React.ReactElement => 
+      React.isValidElement(child) && Boolean(child.props?.id)
+    );
   
   // Handle section change from sidebar
   const handleSectionChange = (sectionId: string) => {
     setActiveSectionId(sectionId);
-    const index = (sections as React.ReactElement[]).findIndex(
+    const index = sections.findIndex(
       section => section.props.id === sectionId
     );
     if (index !== -1) {
@@ -56,7 +57,7 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
     if (currentIndex < sections.length - 1) {
       const nextIndex = currentIndex + 1;
       setCurrentIndex(nextIndex);
-      const nextSection = sections[nextIndex] as React.ReactElement;
+      const nextSection = sections[nextIndex];
       setActiveSectionId(nextSection.props.id);
     }
   };
@@ -65,7 +66,7 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
     if (currentIndex > 0) {
       const prevIndex = currentIndex - 1;
       setCurrentIndex(prevIndex);
-      const prevSection = sections[prevIndex] as React.ReactElement;
+      const prevSection = sections[prevIndex];
       setActiveSectionId(prevSection.props.id);
     }
   };
@@ -88,7 +89,7 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
 
   return (
     <div className="h-full flex items-center justify-center overflow-hidden">
-      {/* Sidebar Navigation */}
+      {/* Sidebar Navigation - positioned by CSS */}
       <Sidebar 
         activeSectionId={activeSectionId} 
         onSectionChange={handleSectionChange} 
@@ -97,17 +98,12 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
       {/* Main Glass Container */}
       <div className="main-container">
         <div className="glass-panel relative">
-          {/* Header */}
-          <div className="absolute top-4 left-8 z-20">
-            <ChevronLeft className="w-5 h-5 text-white/60" />
-          </div>
-          
           {/* Content Area */}
           <div 
             ref={contentRef} 
-            className="relative h-full w-full overflow-hidden"
+            className="relative h-full w-full content-area"
           >
-            {React.Children.map(children, (child: React.ReactNode, index) => {
+            {React.Children.map(children, (child, index) => {
               if (React.isValidElement(child)) {
                 return (
                   <Section
@@ -131,7 +127,7 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
                 className={`pagination-dot ${index === currentIndex ? 'active' : ''}`}
                 onClick={() => {
                   setCurrentIndex(index);
-                  setActiveSectionId((section as React.ReactElement).props.id);
+                  setActiveSectionId(section.props.id);
                 }}
               />
             ))}
@@ -144,7 +140,7 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
                 className="progress-bar-active"
                 initial={{ width: '0%' }}
                 animate={{ 
-                  width: `${(currentIndex / (sections.length - 1)) * 100}%` 
+                  width: `${(currentIndex / Math.max(sections.length - 1, 1)) * 100}%` 
                 }}
                 transition={{ duration: 0.3 }}
               />
