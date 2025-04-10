@@ -45,11 +45,9 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
         {/* Logo Section */}
         <div className="flex items-center justify-center md:justify-start px-4 mb-8">
           <div className="h-12 w-12 rounded-xl bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center">
-            <img 
-              src="/src/assets/icon16.png" 
-              alt="Promen Logo" 
-              className="h-8 w-8" 
-            />
+            <div className="h-8 w-8 bg-white/90 rounded-sm flex items-center justify-center">
+              P
+            </div>
           </div>
           <h1 className="hidden md:block text-2xl font-bold ml-3 tracking-tight">Promen</h1>
         </div>

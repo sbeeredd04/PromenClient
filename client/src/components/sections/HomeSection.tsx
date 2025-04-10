@@ -58,11 +58,9 @@ export default function HomeSection() {
                 <div className="glass rounded-xl p-6 relative">
                   <div className="flex items-center mb-4">
                     <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center mr-3">
-                      <img 
-                        src="/src/assets/icon16.png" 
-                        alt="Promen Logo" 
-                        className="h-6 w-6"
-                      />
+                      <div className="h-6 w-6 bg-white/90 rounded-sm flex items-center justify-center text-purple-700 font-bold text-xs">
+                        P
+                      </div>
                     </div>
                     <h3 className="text-lg font-semibold">Promen AI Assistant</h3>
                   </div>
