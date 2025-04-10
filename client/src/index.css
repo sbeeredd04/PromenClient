@@ -55,12 +55,9 @@
     @apply antialiased bg-background text-foreground;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
-    background-color: var(--color-dark-bg);
-    background-image: url('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
+    background-color: #050510;
+    background: linear-gradient(to bottom, #09061A, #0A0A18);
     background-attachment: fixed;
-    background-blend-mode: multiply;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -69,38 +66,31 @@
 
   /* Glass UI Components */
   .glass {
-    background: var(--color-glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--color-glass-border);
-    box-shadow: var(--glass-shadow);
-    border-radius: var(--glass-border-radius);
+    background: rgba(30, 30, 30, 0.55);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+  }
+
+  .glass-sidebar {
+    background: rgba(30, 30, 30, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   }
 
   .glass-hover:hover {
-    background: var(--color-glass-hover);
+    background: rgba(50, 50, 50, 0.8);
     transition: all 0.3s ease;
   }
 
-  /* Active states for sidebar items */
-  .sidebar-item {
-    @apply flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer transition-all duration-300;
-    color: var(--color-sidebar-item);
-  }
-
-  .sidebar-item:hover {
-    background: var(--color-glass-hover);
-    color: var(--color-sidebar-item-active);
-  }
-
-  .sidebar-item.active {
-    background: var(--color-glass-active);
-    color: var(--color-sidebar-item-active);
-  }
-
+  /* Sidebar icon styling */
   .sidebar-icon {
     @apply w-5 h-5;
-    color: var(--color-sidebar-icon);
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
   }
 
   /* Gradient text and elements */

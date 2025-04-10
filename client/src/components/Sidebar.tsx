@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Info, Layers, Play, FileCheck, Download, Book } from 'lucide-react';
-import { Link } from 'wouter';
+import { Home, Search, Image, Shield, Layers, Play, Archive } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface SidebarProps {
   activeSectionId: string;
 }
 
 export default function Sidebar({ activeSectionId }: SidebarProps) {
+  const [isHovered, setIsHovered] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Update active index based on section ID
+  useEffect(() => {
+    const index = navItems.findIndex(item => item.id === activeSectionId);
+    if (index !== -1) {
+      setActiveIndex(index);
+    }
+  }, [activeSectionId]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,11 +30,11 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
 
   const navItems = [
     { id: 'home', name: 'Home', icon: <Home className="sidebar-icon" /> },
-    { id: 'why', name: 'Why Promen', icon: <Info className="sidebar-icon" /> },
-    { id: 'how', name: 'How It Works', icon: <Play className="sidebar-icon" /> },
-    { id: 'features', name: 'Features', icon: <Layers className="sidebar-icon" /> },
-    { id: 'roadmap', name: 'Roadmap', icon: <FileCheck className="sidebar-icon" /> },
-    { id: 'beta', name: 'Join Beta', icon: <Download className="sidebar-icon" /> },
+    { id: 'why', name: 'Why Promen', icon: <Search className="sidebar-icon" /> },
+    { id: 'how', name: 'How It Works', icon: <Image className="sidebar-icon" /> },
+    { id: 'features', name: 'Features', icon: <Shield className="sidebar-icon" /> },
+    { id: 'roadmap', name: 'Roadmap', icon: <Layers className="sidebar-icon" /> },
+    { id: 'beta', name: 'Join Beta', icon: <Archive className="sidebar-icon" /> },
   ];
 
   // Function to scroll to a section when clicking on sidebar item
@@ -35,48 +45,73 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
     }
   };
 
+  // Animation variants for the sidebar items
+  const itemVariants = {
+    inactive: { scale: 1, opacity: 0.7 },
+    active: { scale: 1.1, opacity: 1 }
+  };
+
   return (
-    <div 
-      className={`fixed left-0 top-0 bottom-0 w-20 md:w-64 z-50 transition-all duration-300 ${
-        isScrolled ? 'opacity-95' : 'opacity-100'
-      }`}
+    <motion.div 
+      className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50"
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="glass h-full flex flex-col px-2 py-8 overflow-hidden">
-        {/* Logo Section */}
-        <div className="flex items-center justify-center md:justify-start px-4 mb-8">
-          <div className="h-12 w-12 rounded-xl bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center">
-            <div className="h-8 w-8 bg-white/90 rounded-sm flex items-center justify-center">
-              P
-            </div>
-          </div>
-          <h1 className="hidden md:block text-2xl font-bold ml-3 tracking-tight">Promen</h1>
-        </div>
-
-        {/* Nav Items */}
-        <nav className="flex-grow">
-          <ul className="space-y-2">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <div
-                  className={`sidebar-item ${activeSectionId === item.id ? 'active' : ''}`}
-                  onClick={() => scrollToSection(item.id)}
+      <motion.div 
+        className="glass-sidebar rounded-full flex flex-col items-center py-5 px-2 space-y-6 backdrop-blur-2xl"
+        animate={{ 
+          width: isHovered ? '60px' : '50px',
+          boxShadow: isHovered ? '0 0 15px rgba(255, 255, 255, 0.2)' : '0 0 10px rgba(0, 0, 0, 0.3)'
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        {navItems.map((item, index) => (
+          <motion.div
+            key={item.id}
+            className={`relative w-10 h-10 flex items-center justify-center rounded-full cursor-pointer ${
+              activeSectionId === item.id ? 'text-white' : 'text-white/50'
+            }`}
+            onClick={() => scrollToSection(item.id)}
+            variants={itemVariants}
+            initial="inactive"
+            animate={activeSectionId === item.id ? "active" : "inactive"}
+            whileHover={{ scale: 1.15, opacity: 1 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Active indicator dot */}
+            {activeSectionId === item.id && (
+              <motion.div 
+                className="absolute right-0 w-1.5 h-1.5 bg-white rounded-full"
+                layoutId="active-indicator"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            )}
+            
+            {/* Icon */}
+            {item.icon}
+            
+            {/* Tooltip on hover */}
+            <AnimatePresence>
+              {isHovered && (
+                <motion.div
+                  className="absolute left-14 bg-black/80 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  {item.icon}
-                  <span className="hidden md:block">{item.name}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Bottom Links */}
-        <div className="mt-auto space-y-2">
-          <div className="sidebar-item">
-            <Book className="sidebar-icon" />
-            <span className="hidden md:block">Documentation</span>
-          </div>
-        </div>
-      </div>
-    </div>
+                  {item.name}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </motion.div>
+    </motion.div>
   );
 }

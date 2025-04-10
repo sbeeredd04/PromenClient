@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 
 export default function HomeSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const { scrollYProgress } = useScroll();
+  
+  // Transform values based on scroll position
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.2]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+  const y = useTransform(scrollYProgress, [0, 0.2], [0, 50]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -16,6 +22,7 @@ export default function HomeSection() {
           className="glass p-10 md:p-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
+          style={{ opacity, scale, y }}
           transition={{ duration: 0.8 }}
         >
           <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
