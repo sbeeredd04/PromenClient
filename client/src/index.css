@@ -4,39 +4,45 @@
 
 @layer base {
   :root {
-    --color-almond: #EEE5DA;
-    --color-charcoal: #262424;
-    --color-lavender: #B8B8CA;
-    --color-navy: #1E202C;
-    --color-purple: #462F9F;
-
-    --text-primary: var(--color-almond);
-    --text-secondary: var(--color-lavender);
-    --bg-dark: rgba(30, 32, 44, 0.95);
-    --bg-glass: rgba(38, 36, 36, 0.1);
-    --border-glass: rgba(184, 184, 202, 0.1);
-    --accent-gradient: linear-gradient(135deg, var(--color-purple), var(--color-lavender));
-    --shadow-color: rgba(0, 0, 0, 0.4);
-    --blur-amount: 20px;
-
-    --background: 230 15% 15%;
-    --foreground: 37 55% 89%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Custom UI Colors */
+    --color-dark-bg: #1A1A1A;
+    --color-glass-bg: rgba(30, 30, 30, 0.75);
+    --color-glass-hover: rgba(50, 50, 50, 0.75);
+    --color-glass-active: rgba(70, 70, 70, 0.75);
+    --color-glass-border: rgba(255, 255, 255, 0.1);
+    --color-sidebar-item: rgba(255, 255, 255, 0.6);
+    --color-sidebar-item-active: rgba(255, 255, 255, 0.9);
+    --color-sidebar-icon: rgba(255, 255, 255, 0.7);
+    
+    /* Promen Theme Colors */
+    --color-promen-primary: #462F9F;
+    --color-promen-secondary: #B8B8CA;
+    --color-promen-accent: #7a67c7;
+    
+    /* Glass UI Variables */
+    --glass-blur: 15px;
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --glass-border-radius: 16px;
+    
+    /* Define theme variables */
+    --background: 0 0% 10%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 95%;
     --primary: 260 54% 40%;
-    --primary-foreground: 210 40% 98%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 240 10% 75%;
-    --secondary-foreground: 240 10% 3.9%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 240 10% 75%;
-    --accent: 240 10% 75%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 240 10% 75% / 0.1;
-    --input: 240 10% 75% / 0.1;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 260 54% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 30%;
+    --input: 0 0% 20%;
     --ring: 260 54% 40%;
     --radius: 0.75rem;
   }
@@ -49,122 +55,112 @@
     @apply antialiased bg-background text-foreground;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    background-color: var(--color-dark-bg);
+    background-image: url('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
   }
 
+  /* Glass UI Components */
   .glass {
-    @apply backdrop-blur-lg shadow-lg;
-    background: var(--bg-glass);
-    backdrop-filter: blur(var(--blur-amount));
-    -webkit-backdrop-filter: blur(var(--blur-amount));
-    border: 1px solid var(--border-glass);
-    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--glass-border-radius);
   }
 
+  .glass-hover:hover {
+    background: var(--color-glass-hover);
+    transition: all 0.3s ease;
+  }
+
+  /* Active states for sidebar items */
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer transition-all duration-300;
+    color: var(--color-sidebar-item);
+  }
+
+  .sidebar-item:hover {
+    background: var(--color-glass-hover);
+    color: var(--color-sidebar-item-active);
+  }
+
+  .sidebar-item.active {
+    background: var(--color-glass-active);
+    color: var(--color-sidebar-item-active);
+  }
+
+  .sidebar-icon {
+    @apply w-5 h-5;
+    color: var(--color-sidebar-icon);
+  }
+
+  /* Gradient text and elements */
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background: var(--accent-gradient);
+    background: linear-gradient(135deg, var(--color-promen-primary), var(--color-promen-accent));
     -webkit-background-clip: text;
     background-clip: text;
   }
 
-  .gradient-border {
-    position: relative;
-    border-radius: var(--radius);
-    z-index: 0;
+  /* Section animations */
+  .section-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
 
-  .gradient-border::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: var(--radius);
-    padding: 1px;
-    background: var(--accent-gradient);
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    z-index: -1;
-    opacity: 0.7;
+  .section-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .btn-gradient {
-    @apply text-white transition-all duration-300;
-    background: var(--accent-gradient);
+  /* Button styles */
+  .button-primary {
+    @apply px-6 py-2 rounded-full transition-all duration-300;
+    background: linear-gradient(135deg, var(--color-promen-primary), var(--color-promen-accent));
+    color: white;
   }
 
-  .btn-gradient:hover {
-    box-shadow: 0 0 15px rgba(70, 47, 159, 0.6);
+  .button-primary:hover {
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(70, 47, 159, 0.4);
   }
 
-  .floating {
-    animation: float 6s ease-in-out infinite;
+  .button-secondary {
+    @apply px-6 py-2 rounded-full transition-all duration-300;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
+  .button-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  .waves {
-    @apply absolute inset-0 -z-10 opacity-70 bg-cover bg-center bg-no-repeat overflow-hidden;
+  /* Scroll animations */
+  .scroll-indicator {
+    @apply absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center;
+    animation: bounce 2s infinite;
   }
 
-  .wave1 {
-    filter: brightness(0.2) contrast(1.5) hue-rotate(210deg);
-    transform: scale(1.1);
-    opacity: 0.6;
-  }
-
-  .wave2 {
-    filter: brightness(0.15) contrast(2) hue-rotate(200deg);
-    transform: scale(1.2) rotate(10deg);
-    opacity: 0.3;
-  }
-
-  .shortcut-key {
-    @apply inline-flex items-center justify-center bg-white/10 rounded px-1.5 py-0.5 text-xs font-mono mx-0.5;
-  }
-
-  .parallax {
-    transition: transform 0.3s ease-out;
-  }
-
-  .nav-item {
-    position: relative;
-  }
-  
-  .nav-item::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent-gradient);
-    transition: width 0.3s ease;
-  }
-  
-  .nav-item:hover::after {
-    width: 100%;
-  }
-
-  .feature-card {
-    @apply transition-all duration-300;
-  }
-  
-  .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0) translateX(-50%);
+    }
+    40% {
+      transform: translateY(-10px) translateX(-50%);
+    }
+    60% {
+      transform: translateY(-5px) translateX(-50%);
+    }
   }
 }
