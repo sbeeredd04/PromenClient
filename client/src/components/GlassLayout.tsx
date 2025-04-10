@@ -1,6 +1,6 @@
-import { ReactNode, useState, useEffect, useRef } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
-import { ChevronDown, ChevronLeft } from 'lucide-react';
+import { ChevronDown, MousePointer } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface GlassLayoutProps {
@@ -11,7 +11,6 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
   const [activeSectionId, setActiveSectionId] = useState('home');
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Function to update mouse position for subtle parallax effects
   useEffect(() => {
@@ -26,22 +25,18 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
     };
   }, []);
 
-  // Function to update active section based on scroll position in the container
+  // Function to update active section based on scroll position
   useEffect(() => {
-    if (!containerRef.current) return;
-    
-    const container = containerRef.current;
-    
     const handleScroll = () => {
-      const scrollPosition = container.scrollTop + 100; // Offset to trigger a bit earlier
+      const scrollPosition = window.scrollY + 100; // Offset to trigger a bit earlier
       
-      // Get all section elements within the container
-      const sections = container.querySelectorAll('section[id]');
+      // Get all section elements
+      const sections = document.querySelectorAll('section[id]');
       
       // Hide scroll indicator after scrolling
-      if (container.scrollTop > 150 && showScrollIndicator) {
+      if (window.scrollY > 150 && showScrollIndicator) {
         setShowScrollIndicator(false);
-      } else if (container.scrollTop <= 100 && !showScrollIndicator) {
+      } else if (window.scrollY <= 100 && !showScrollIndicator) {
         setShowScrollIndicator(true);
       }
       
@@ -57,23 +52,20 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
       });
     };
     
-    container.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
     
     // Call once on mount to set initial active section
     handleScroll();
     
     return () => {
-      container.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [showScrollIndicator, containerRef.current]);
+  }, [showScrollIndicator]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
-      {/* Darkened overlay to enhance glass effect */}
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
-      
+    <div className="relative min-h-screen">
       {/* Background gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <motion.div 
           className="absolute w-96 h-96 rounded-full bg-purple-600/20 blur-3xl"
           animate={{ 
@@ -96,72 +88,38 @@ export default function GlassLayout({ children }: GlassLayoutProps) {
         />
       </div>
       
-      {/* Vision Pro style container */}
-      <motion.div 
-        className="relative w-[85%] h-[80%] max-w-7xl overflow-hidden z-10 vision-container"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* Header bar with title */}
-        <motion.div 
-          className="absolute top-0 left-0 right-0 h-14 bg-black/20 backdrop-blur-md z-20 flex items-center justify-center border-b border-white/5"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          <div className="flex items-center">
-            <ChevronLeft className="h-4 w-4 text-white/60 mr-2" />
-            <span className="text-white/80 text-sm font-medium tracking-wide">
-              Only on <span className="bg-gradient-to-r from-purple-500 via-purple-400 to-indigo-400 bg-clip-text text-transparent font-semibold">Promen AI</span>
-            </span>
-          </div>
-        </motion.div>
+      {/* Main content */}
+      <div className="relative min-h-screen flex">
+        {/* Sidebar */}
+        <Sidebar activeSectionId={activeSectionId} />
         
-        {/* Main flex container */}
-        <div className="flex h-full">
-          {/* Sidebar */}
-          <div className="flex-shrink-0 h-full py-12">
-            <Sidebar activeSectionId={activeSectionId} />
-          </div>
+        {/* Main Content */}
+        <main className="flex-grow">
+          {children}
           
-          {/* Main content scrollable area */}
-          <div 
-            ref={containerRef}
-            className="flex-grow h-full overflow-y-auto overflow-x-hidden scroll-smooth" 
-            style={{ 
-              background: 'rgba(25, 25, 30, 0.25)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              borderRadius: '0 24px 24px 0'
-            }}
-          >
-            {children}
-            
-            {/* Scroll indicator (only shown on home section) */}
-            <AnimatePresence>
-              {activeSectionId === 'home' && showScrollIndicator && (
+          {/* Scroll indicator (only shown on home section) */}
+          <AnimatePresence>
+            {activeSectionId === 'home' && showScrollIndicator && (
+              <motion.div 
+                className="scroll-indicator"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.5 }}
+              >
                 <motion.div 
-                  className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.5 }}
+                  className="flex flex-col items-center"
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  <motion.div 
-                    className="flex flex-col items-center"
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <span className="text-sm text-white/60 mb-1">Scroll to explore</span>
-                    <ChevronDown className="w-5 h-5 text-white/60" />
-                  </motion.div>
+                  <span className="text-sm text-white/60 mb-1">Scroll to explore</span>
+                  <ChevronDown className="w-5 h-5 text-white/60" />
                 </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-      </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>
+      </div>
       
       {/* Mouse follower cursor effect */}
       <motion.div
