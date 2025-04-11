@@ -7,17 +7,17 @@ export default function HowItWorksSection() {
     {
       number: "1",
       title: "Install Extension",
-      description: "Add Promen to Chrome with just a few clicks. No account required to get started."
+      description: "Add prom10 to Chrome with just a few clicks. No account required to get started."
     },
     {
       number: "2",
       title: "Write Your Prompt",
-      description: "Start typing in any text field across the web. Promen will detect it automatically."
+      description: "Start typing in any text field across the web. prom10 will detect it automatically."
     },
     {
       number: "3",
       title: "Use Keyboard Shortcuts",
-      description: "Access Promen's features with simple keyboard shortcuts to enhance or rephrase your prompt."
+      description: "Access prom10's features with simple keyboard shortcuts to enhance or rephrase your prompt."
     }
   ];
 
@@ -54,7 +54,7 @@ export default function HowItWorksSection() {
             How <span className="gradient-text">It Works</span>
           </h2>
           <p className="text-secondary text-lg">
-            Promen integrates seamlessly into your workflow, appearing only when you need it and staying out of your way when you don't.
+            prom10 integrates seamlessly into your workflow, appearing only when you need it and staying out of your way when you don't.
           </p>
         </motion.div>
         
@@ -88,7 +88,7 @@ export default function HowItWorksSection() {
           <div className="aspect-w-16 aspect-h-9 mb-8 relative">
             <img 
               src="https://images.unsplash.com/photo-1661956602868-6ae368943878?q=80&w=1470&auto=format&fit=crop" 
-              alt="Promen Demo" 
+              alt="prom10 Demo" 
               className="w-full h-auto rounded-lg object-cover" 
             />
             <div className="absolute inset-0 flex items-center justify-center">
@@ -101,9 +101,9 @@ export default function HowItWorksSection() {
               </motion.div>
             </div>
           </div>
-          <h3 className="text-2xl font-display font-semibold mb-4">See Promen in Action</h3>
+          <h3 className="text-2xl font-display font-semibold mb-4">See prom10 in Action</h3>
           <p className="text-secondary">
-            Watch our demo to see how Promen can transform your interaction with AI tools, making your prompts more effective and your workflow more efficient.
+            Watch our demo to see how prom10 can transform your interaction with AI tools, making your prompts more effective and your workflow more efficient.
           </p>
         </motion.div>
       </div>

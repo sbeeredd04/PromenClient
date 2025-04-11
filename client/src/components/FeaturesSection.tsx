@@ -41,7 +41,7 @@ export default function FeaturesSection() {
             Powerful <span className="gradient-text">Features</span>
           </h2>
           <p className="text-secondary text-lg">
-            Promen offers a suite of powerful tools to enhance your interactions with AI models, making your prompts more effective and your workflow more efficient.
+            prom10 offers a suite of powerful tools to enhance your interactions with AI models, making your prompts more effective and your workflow more efficient.
           </p>
         </motion.div>
         

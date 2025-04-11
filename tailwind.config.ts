@@ -49,7 +49,7 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        // Custom colors for the Promen application
+        // Custom colors for the prom10 application
         almond: "#EEE5DA",
         charcoal: "#262424",
         lavender: "#B8B8CA",

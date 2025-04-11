@@ -31,7 +31,7 @@ export default function Sidebar({ activeSectionId }: SidebarProps) {
 
   const navItems = [
     { id: 'home', name: 'Home', icon: <Home className="sidebar-icon" /> },
-    { id: 'why', name: 'Why Promen', icon: <Search className="sidebar-icon" /> },
+    { id: 'why', name: 'Why prom10', icon: <Search className="sidebar-icon" /> },
     { id: 'how', name: 'How It Works', icon: <Image className="sidebar-icon" /> },
     { id: 'features', name: 'Features', icon: <Shield className="sidebar-icon" /> },
     { id: 'roadmap', name: 'Roadmap', icon: <Layers className="sidebar-icon" /> },

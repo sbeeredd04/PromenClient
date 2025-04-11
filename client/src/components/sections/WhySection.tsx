@@ -70,7 +70,7 @@ export default function WhySection() {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center rounded-full px-3 py-1 text-sm bg-purple-500/20 text-white/80 mb-4"
             >
-              <span>Why Choose Promen</span>
+              <span>Why Choose prom10</span>
             </motion.div>
             
             <motion.h2 
@@ -91,7 +91,7 @@ export default function WhySection() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               In the near future, prompts are the primary bridge to AI tools. The quality of your prompt directly dictates the quality of the AI's output. A basic prompt might yield a vague response, while a well-crafted one unlocks detailed, relevant results. 
-              Promen is designed to elevate your prompts, providing a powerful interface for crafting and refining your interaction with AI.
+              prom10 is designed to elevate your prompts, providing a powerful interface for crafting and refining your interaction with AI.
             </motion.p>
           </div>
           

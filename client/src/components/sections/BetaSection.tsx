@@ -8,7 +8,7 @@ export default function BetaSection() {
   const benefits = [
     "Early access to all features before public release",
     "Direct influence on product development",
-    "Private Discord community with the Promen team",
+    "Private Discord community with the prom10 team",
     "Free premium features when we launch"
   ];
 
@@ -55,7 +55,7 @@ export default function BetaSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Be among the first to experience Promen and help shape its future. Our beta testers receive early access to new features and a direct line to our development team.
+                Be among the first to experience prom10 and help shape its future. Our beta testers receive early access to new features and a direct line to our development team.
               </motion.p>
               
               <div className="space-y-4 mb-8">
@@ -109,7 +109,7 @@ export default function BetaSection() {
                         P
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold">Promen AI Assistant</h3>
+                    <h3 className="text-lg font-semibold">prom10 AI Assistant</h3>
                   </div>
                   
                   <div className="space-y-4">

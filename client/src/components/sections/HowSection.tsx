@@ -34,17 +34,17 @@ export default function HowSection() {
     {
       number: "1",
       title: "Install Extension",
-      description: "Add Promen to Chrome with just a few clicks. No account required to get started."
+      description: "Add prom10 to Chrome with just a few clicks. No account required to get started."
     },
     {
       number: "2",
       title: "Write Your Prompt",
-      description: "Start typing in any text field across the web. Promen will detect it automatically."
+      description: "Start typing in any text field across the web. prom10 will detect it automatically."
     },
     {
       number: "3",
       title: "Use Keyboard Shortcuts",
-      description: "Access Promen's features with simple keyboard shortcuts to enhance or rephrase your prompt."
+      description: "Access prom10's features with simple keyboard shortcuts to enhance or rephrase your prompt."
     }
   ];
 
@@ -90,7 +90,7 @@ export default function HowSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Promen integrates seamlessly into your workflow, appearing only when you need it and 
+              prom10 integrates seamlessly into your workflow, appearing only when you need it and 
               staying out of your way when you don't.
             </motion.p>
           </div>

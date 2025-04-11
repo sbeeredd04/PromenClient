@@ -84,7 +84,7 @@ export default function RoadmapSection() {
             Our <span className="gradient-text">Roadmap</span>
           </h2>
           <p className="text-secondary text-lg">
-            We're constantly working to make Promen better. Here's what we have planned for upcoming releases.
+            We're constantly working to make prom10 better. Here's what we have planned for upcoming releases.
           </p>
         </motion.div>
         

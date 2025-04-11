@@ -18,7 +18,7 @@ export default function HeroSection() {
               The AI <span className="gradient-text">Prompt Assistant</span> for your browser
             </h1>
             <p className="text-secondary text-lg md:text-xl mb-8 max-w-2xl">
-              Promen enhances your productivity and creativity when working with AI tools by providing intelligent prompt assistance right at your fingertips.
+              prom10 enhances your productivity and creativity when working with AI tools by providing intelligent prompt assistance right at your fingertips.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button variant="gradient" size="lg" asChild>
@@ -48,7 +48,7 @@ export default function HeroSection() {
             <Card className="glass gradient-border p-4 sm:p-6 rounded-xl relative overflow-hidden max-w-xl mx-auto">
               <img 
                 src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1770&auto=format&fit=crop" 
-                alt="Promen UI mockup showing AI prompt assistance" 
+                alt="prom10 UI mockup showing AI prompt assistance" 
                 className="w-full h-auto rounded-lg" 
               />
               <div className="absolute bottom-0 left-0 right-0 p-4 glass rounded-b-lg">

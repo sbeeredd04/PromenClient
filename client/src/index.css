@@ -14,10 +14,10 @@
     --color-sidebar-item-active: rgba(255, 255, 255, 0.9);
     --color-sidebar-icon: rgba(255, 255, 255, 0.7);
     
-    /* Promen Theme Colors */
-    --color-promen-primary: #462F9F;
-    --color-promen-secondary: #B8B8CA;
-    --color-promen-accent: #7a67c7;
+    /* prom10 Theme Colors */
+    --color-prom10-primary: #462F9F;
+    --color-prom10-secondary: #B8B8CA;
+    --color-prom10-accent: #7a67c7;
     
     /* Glass UI Variables */
     --glass-blur: 15px;
@@ -96,7 +96,7 @@
   /* Gradient text and elements */
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background: linear-gradient(135deg, var(--color-promen-primary), var(--color-promen-accent));
+    background: linear-gradient(135deg, var(--color-prom10-primary), var(--color-prom10-accent));
     -webkit-background-clip: text;
     background-clip: text;
   }
@@ -116,7 +116,7 @@
   /* Button styles */
   .button-primary {
     @apply px-6 py-2 rounded-full transition-all duration-300;
-    background: linear-gradient(135deg, var(--color-promen-primary), var(--color-promen-accent));
+    background: linear-gradient(135deg, var(--color-prom10-primary), var(--color-prom10-accent));
     color: white;
   }
 

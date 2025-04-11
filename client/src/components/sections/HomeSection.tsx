@@ -37,7 +37,7 @@ export default function HomeSection() {
               </h1>
               
               <p className="text-lg text-white/70 mb-8">
-                Promen enhances your productivity and creativity when working with AI tools 
+                prom10 enhances your productivity and creativity when working with AI tools 
                 by providing intelligent prompt assistance right at your fingertips.
               </p>
               
@@ -69,7 +69,7 @@ export default function HomeSection() {
                         P
                       </div>
                     </div>
-                    <h3 className="text-lg font-semibold">Promen AI Assistant</h3>
+                    <h3 className="text-lg font-semibold">prom10 AI Assistant</h3>
                   </div>
                   
                   <div className="space-y-4">

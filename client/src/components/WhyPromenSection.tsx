@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Card } from './ui/card';
 import { Zap, Lightbulb, Keyboard } from 'lucide-react';
 
-export default function WhyPromenSection() {
+export default function Whyprom10Section() {
   const features = [
     {
       icon: <Zap className="h-6 w-6 text-foreground" />,
@@ -51,10 +51,10 @@ export default function WhyPromenSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-display font-semibold mb-6">
-            Why <span className="gradient-text">Promen</span>?
+            Why <span className="gradient-text">prom10</span>?
           </h2>
           <p className="text-secondary text-lg">
-            In the near future, the only bridge that will connect humans with AI tools is the prompt. Promen aims to be at the forefront of this transformation by providing a powerful and intuitive interface for crafting and refining prompts.
+            In the near future, the only bridge that will connect humans with AI tools is the prompt. prom10 aims to be at the forefront of this transformation by providing a powerful and intuitive interface for crafting and refining prompts.
           </p>
         </motion.div>
         

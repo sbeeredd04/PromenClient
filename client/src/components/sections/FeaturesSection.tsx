@@ -172,7 +172,7 @@ export default function FeaturesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Promen comes packed with powerful features to enhance your AI interactions, 
+              prom10 comes packed with powerful features to enhance your AI interactions, 
               all accessible through simple keyboard shortcuts.
             </motion.p>
           </div>

@@ -123,7 +123,7 @@ export default function RoadmapSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              We have an exciting roadmap ahead, with plans to expand Promen's capabilities 
+              We have an exciting roadmap ahead, with plans to expand prom10's capabilities 
               and make it available across more platforms.
             </motion.p>
           </div>

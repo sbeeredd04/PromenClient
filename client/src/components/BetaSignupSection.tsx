@@ -14,7 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  usage: z.string().min(1, { message: "Please select how you plan to use Promen." }),
+  usage: z.string().min(1, { message: "Please select how you plan to use prom10." }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -71,7 +71,7 @@ export default function BetaSignupSection() {
                 Join Our <span className="gradient-text">Beta</span>
               </h2>
               <p className="text-secondary text-lg mb-8">
-                Be among the first to experience Promen and help shape its future. Sign up for our beta program today.
+                Be among the first to experience prom10 and help shape its future. Sign up for our beta program today.
               </p>
               <ul className="space-y-3 text-secondary mb-8">
                 {benefits.map((benefit, idx) => (
@@ -127,7 +127,7 @@ export default function BetaSignupSection() {
                     name="usage"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-secondary">How do you plan to use Promen?</FormLabel>
+                        <FormLabel className="text-secondary">How do you plan to use prom10?</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger glassmorphism className="w-full">

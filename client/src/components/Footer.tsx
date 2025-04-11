@@ -21,7 +21,7 @@ export default function Footer() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-display font-semibold text-foreground">Promen</h3>
+                <h3 className="text-xl font-display font-semibold text-foreground">prom10</h3>
               </div>
               <p className="text-secondary text-sm mb-6">
                 Enhancing your productivity and creativity when working with AI tools.
@@ -75,7 +75,7 @@ export default function Footer() {
           
           <div className="mt-12 pt-8 border-t border-lavender/10 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-secondary mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} Promen. All rights reserved.
+              &copy; {new Date().getFullYear()} prom10. All rights reserved.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-sm text-secondary hover:text-foreground transition-colors">Privacy</a>
